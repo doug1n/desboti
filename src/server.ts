@@ -1,5 +1,7 @@
 import App from "./app";
 
-const app = new App([], 3334);
+import SellerController from "./controllers/seller";
+
+const app = new App([new SellerController()], 3334);
 
 app.listen();
