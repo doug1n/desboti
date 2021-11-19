@@ -1,0 +1,19 @@
+version: "3.3"
+
+services:
+  mysql:
+    container_name: boticario-mysql
+    build: .docker/mysql
+    command: --init-file /data/application/init.sql --innodb-use-native-aio=0
+    restart: always
+    tty: true
+    ports:
+      - 4418:3306
+    volumes:
+      - .docker/mysql_data:/var/lib/mysql
+      - .docker/init.sql:/data/application/init.sql
+    env_file:
+      - .env
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
